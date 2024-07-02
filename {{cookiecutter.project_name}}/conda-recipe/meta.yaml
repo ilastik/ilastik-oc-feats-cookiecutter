@@ -1,0 +1,42 @@
+{% raw %}
+{% set pyproject = load_file_data('pyproject.toml') %}
+{% set pp = pyproject.get('project') %}
+{% endraw %}
+
+package:
+  version: {{ "{{ pp.get('version') }}" }}
+  name: {{ "{{ pp.get('name') }}" }}
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+
+requirements:
+  host:
+    - python {{ "{{ pp.get('requires-python') }}" }}
+    - pip
+    {% raw %}
+    {% for host_dep in pyproject.get('build-system').get('requires') %}
+    - {{ host_dep.lower() }}
+    {% endfor %}
+    {% endraw %}
+
+  run:
+    - python {{ "{{ pp.get('requires-python') }}" }}
+    {% raw %}
+    {% for dep in pp.get('dependencies') %}
+    - {{ dep.lower() }}
+    {% endfor %}
+    {% endraw %}
+
+test:
+  imports:
+    - {{ cookiecutter.project_name }}
+  commands:
+    - pytest
+  requires:
+    - pytest
