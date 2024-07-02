@@ -1,0 +1,9 @@
+{
+    "project_name": "my_feature_plugin",
+    "description": "A short description on what kind of features the plugin computes.",
+    "author_name": "Your Name",
+    "author_email": "your_email@provider.tld",
+    "module_name": "the_module",
+    "feature_class_name": "MyObjectFeatures",
+    "initial_version": "0.0.1"
+}
