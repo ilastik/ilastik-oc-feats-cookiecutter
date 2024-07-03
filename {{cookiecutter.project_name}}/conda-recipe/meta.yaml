@@ -38,5 +38,7 @@ test:
     - {{ cookiecutter.project_name }}
   commands:
     - pytest
+  source_files:
+    - tests
   requires:
     - pytest
