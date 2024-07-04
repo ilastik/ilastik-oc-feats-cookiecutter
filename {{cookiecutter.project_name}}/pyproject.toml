@@ -15,4 +15,7 @@ requires-python = ">=3.9"
 
 
 [project.entry-points."ilastik.objectfeatures"]
-thepackage_features = "{{ cookiecutter.project_name }}"
+{{ cookiecutter.project_name }} = "{{ cookiecutter.project_name }}"
+
+[tool.setuptools.package-data]
+{{ cookiecutter.project_name }} = ["*.yapsy-plugin"]
