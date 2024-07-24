@@ -13,7 +13,14 @@ class FeatureDescription(TypedDict):
     detailtext: str
     tooltip: str
     advanced: bool
-    group: str
+    # for grouping features in plugins, adds another level in the feature
+    # selection tree.
+    # Only special value is "location", and should be given whenever
+    # absolute coordinates (image) are involved.
+    group: NotRequired[str]
+    # _currently_ if this parameter is given, features are computed via
+    # compute_local, very likely to be changed.
+    # margin value can be set in the ilastik UI
     margin: NotRequired[int]
     # features are assumed to be able to do 2D and 3D. If your feature
     # cannot do one of them, you can mark those accordingly by setting
@@ -181,4 +188,6 @@ class {{ cookiecutter.feature_class_name }}(ObjectFeaturesPlugin):
             same dictionary, with additional fields filled for each feature
 
         """
-        return super().fill_properties(feature_dict)
+        for k, v in feature_dict.items():
+            v.update(self._feature_dict[k])
+        return feature_dict
