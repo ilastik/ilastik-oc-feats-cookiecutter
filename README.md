@@ -9,7 +9,7 @@ You need to have the `cookiecutter` executable available.
 ### create repository from cookiecutter
 
 ```bash
-cookiecutter gh:k-dominik/ilastik-oc-feats-cookiecutter
+cookiecutter gh:ilastik/ilastik-oc-feats-cookiecutter
 ```
 
 I recommend doing `git init` in the newly created folder and adding
